@@ -1,0 +1,6 @@
+export * from './home'
+export * from './garantia'
+export * from './servicios'
+export * from './opiniones'
+export * from './cliente'
+export * from './acerca'
