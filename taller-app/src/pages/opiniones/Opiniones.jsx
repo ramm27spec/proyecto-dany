@@ -12,7 +12,8 @@ export function Opiniones() {
     }
 
     try {
-      const res = await fetch("https://proyecto-dany-lovat.vercel.app/api/opiniones", {
+      // AQUÍ ESTÁ EL CAMBIO: Ruta relativa para que no falle por CORS
+      const res = await fetch("/api/opiniones", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, mensaje, estrellas })
@@ -35,7 +36,6 @@ export function Opiniones() {
   };
 
   return (
-    // CAMBIO AQUÍ: w-full y p-4 aseguran que se ajuste al ancho del celular
     <div className="w-full min-h-screen bg-gray-100 flex items-center justify-center p-4 overflow-x-hidden">
       <div className="bg-white shadow-xl rounded-xl p-6 w-full max-w-lg">
         <h2 className="text-xl md:text-2xl font-bold mb-4 text-center text-blue-900">
