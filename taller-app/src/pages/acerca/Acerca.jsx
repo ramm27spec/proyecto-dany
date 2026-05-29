@@ -18,13 +18,15 @@
 
 export function Acerca() {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    // Cambiamos a w-full, agregamos px-4 para aire lateral y quitamos el ancho máximo fijo
+    <div className="w-full mx-auto px-4 py-8 md:px-6 md:py-12">
 
-      <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
+      <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8 text-center">
         Nuestra Historia
       </h1>
 
-      <div className="bg-white shadow-xl rounded-2xl p-8 leading-8 text-gray-700">
+      {/* Ajustamos el padding y el tamaño de texto para móviles */}
+      <div className="bg-white shadow-xl rounded-2xl p-6 md:p-8 leading-7 md:leading-8 text-gray-700">
 
         <p className="mb-6">
           Nuestro taller abrió sus puertas en el año 2021, impulsado por el sueño y la pasión del señor Enny, quien heredó el amor por la mecánica desde muy pequeño gracias a su padre, también mecánico.
@@ -63,7 +65,6 @@ export function Acerca() {
         </p>
 
       </div>
-
     </div>
   )
 }

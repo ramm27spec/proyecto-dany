@@ -101,42 +101,41 @@ export function Navbar() {
     <div className="bg-blue-950 text-white shadow-md">
 
       {/* Parte superior */}
-      <div className="px-10 py-5 border-b border-blue-800">
-        <h1 className="text-3xl font-bold">
-         Italika 
+      <div className="px-6 py-4 border-b border-blue-800 md:px-10">
+        <h1 className="text-2xl font-bold md:text-3xl">
+          Italika 
         </h1>
       </div>
 
-      {/* Menú */}
-      <div className="flex gap-10 px-10 py-3 text-lg items-center">
+      {/* Menú: Agregamos flex-wrap para que se acomode en celular */}
+      <div className="flex flex-wrap gap-4 px-4 py-3 text-sm items-center justify-center md:gap-10 md:px-10 md:text-lg md:justify-start">
 
         <Link to="/" className="flex items-center gap-2 hover:text-yellow-400">
-          <Home size={20} />
+          <Home size={18} />
           Inicio
         </Link>
 
         <Link to="/servicios" className="flex items-center gap-2 hover:text-yellow-400">
-          <Wrench size={20} />
+          <Wrench size={18} />
           Servicios
         </Link>
 
         <Link to="/garantia" className="flex items-center gap-2 hover:text-yellow-400">
-          <ShieldCheck size={20} />
+          <ShieldCheck size={18} />
           Garantía
         </Link>
 
         <Link to="/opiniones" className="flex items-center gap-2 hover:text-yellow-400">
-          <MessageSquare size={20} />
+          <MessageSquare size={18} />
           Opiniones
         </Link>
 
         <Link to="/acerca" className="flex items-center gap-2 hover:text-yellow-400">
-          <Info size={20} />
+          <Info size={18} />
           Acerca
         </Link>
 
       </div>
-
     </div>
   )
 }
