@@ -20,6 +20,13 @@
       "src": "/(.*)",
       "dest": "taller-app/$1",
       "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "taller-app/index.html"
     }
   ]
 }
