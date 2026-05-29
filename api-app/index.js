@@ -7,22 +7,23 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Esta función se asegura de conectar SOLO cuando se llama a la ruta
 const conectarDB = async () => {
   if (mongoose.connection.readyState >= 1) return;
-  await mongoose.connect(process.env.MONGO_URI);
+  // Usamos dbName para ser específicos y evitar confusiones
+  await mongoose.connect(process.env.MONGO_URI, {
+    dbName: "taller_db" 
+  });
 };
 
 app.post('/api/opiniones', async (req, res) => {
   try {
-    await conectarDB(); // Conectamos justo antes de guardar
+    await conectarDB();
     const nuevaOpinion = new Opinion(req.body);
     await nuevaOpinion.save();
     res.status(201).json({ mensaje: '¡Opinión guardada con éxito!' });
   } catch (error) {
     console.error("ERROR DETALLADO:", error);
-    // Enviamos el mensaje del error para verlo en el alert del navegador
-    res.status(500).json({ error: "Fallo en la base de datos: " + error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
