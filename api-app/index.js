@@ -4,26 +4,25 @@ import cors from 'cors';
 import Opinion from './models/Opinion.js';
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
-// Conexión a MongoDB (con seguridad para no abrir muchas conexiones)
+// Esta función se asegura de conectar SOLO cuando se llama a la ruta
 const conectarDB = async () => {
   if (mongoose.connection.readyState >= 1) return;
   await mongoose.connect(process.env.MONGO_URI);
 };
 
-// Ruta de API
 app.post('/api/opiniones', async (req, res) => {
   try {
-    await conectarDB();
+    await conectarDB(); // Conectamos justo antes de guardar
     const nuevaOpinion = new Opinion(req.body);
     await nuevaOpinion.save();
     res.status(201).json({ mensaje: '¡Opinión guardada con éxito!' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error en el servidor' });
+    console.error("ERROR DETALLADO:", error);
+    // Enviamos el mensaje del error para verlo en el alert del navegador
+    res.status(500).json({ error: "Fallo en la base de datos: " + error.message });
   }
 });
 
