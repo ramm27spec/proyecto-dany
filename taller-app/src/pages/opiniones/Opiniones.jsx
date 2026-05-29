@@ -12,7 +12,8 @@ export function Opiniones() {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/opiniones", {
+      // Solo cambiamos esto: ruta relativa para Vercel apuntando a tu backend
+      const res = await fetch("/api/opiniones", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -20,13 +21,17 @@ export function Opiniones() {
         body: JSON.stringify({ nombre, mensaje, estrellas })
       })
 
-      const data = await res.text()
-      alert(data)
-
-      // limpiar
-      setNombre("")
-      setMensaje("")
-      setEstrellas(0)
+      const data = await res.json()
+      
+      if (res.ok) {
+        alert(data.mensaje || "¡Opinión guardada con éxito!")
+        // limpiar
+        setNombre("")
+        setMensaje("")
+        setEstrellas(0)
+      } else {
+        alert(data.error || "Hubo un problema en el servidor")
+      }
 
     } catch (error) {
       console.error(error)
