@@ -33,7 +33,7 @@ app.post('/api/opiniones', async (req, res) => {
   }
 });
 
-const MONGO_URI = 'mongodb://localhost:27017/taller_db';
+const MONGO_URI = 'mongodb+srv://rodrigoralesmendoza26_db_user:mendoza2777@cluster0.392v5gb.mongodb.net/taller_db?appName=Cluster0';
 
 mongoose.connect(MONGO_URI)
   .then(() => {
