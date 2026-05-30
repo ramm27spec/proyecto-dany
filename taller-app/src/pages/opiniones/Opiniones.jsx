@@ -4,6 +4,7 @@ export function Opiniones() {
   const [nombre, setNombre] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [estrellas, setEstrellas] = useState(0);
+  const [enviando, setEnviando] = useState(false);
 
   const enviarOpinion = async () => {
     if (!nombre || !mensaje || estrellas === 0) {
@@ -11,8 +12,8 @@ export function Opiniones() {
       return;
     }
 
+    setEnviando(true);
     try {
-      // AQUÍ ESTÁ EL CAMBIO: Ruta relativa para que no falle por CORS
       const res = await fetch("/api/opiniones", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -27,11 +28,13 @@ export function Opiniones() {
         setMensaje("");
         setEstrellas(0);
       } else {
-        alert("Error del servidor: " + (data.error || "No se pudo guardar"));
+        throw new Error(data.error || "Error al guardar en el servidor");
       }
     } catch (error) {
-      console.error("Error al conectar:", error);
-      alert("Error al enviar: Verifica tu conexión a internet");
+      console.error("Detalle del error:", error);
+      alert("Error: " + error.message);
+    } finally {
+      setEnviando(false);
     }
   };
 
@@ -71,9 +74,10 @@ export function Opiniones() {
 
         <button
           onClick={enviarOpinion}
-          className="w-full bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition-transform active:scale-95"
+          disabled={enviando}
+          className={`w-full py-3 rounded-lg transition-transform ${enviando ? "bg-gray-400" : "bg-blue-900 hover:bg-blue-800"} text-white active:scale-95`}
         >
-          Enviar opinión
+          {enviando ? "Enviando..." : "Enviar opinión"}
         </button>
       </div>
     </div>
